@@ -1,0 +1,73 @@
+<ion-header>
+  <ion-navbar>
+    <ion-title>Sign Up</ion-title>
+  </ion-navbar>
+</ion-header>
+
+
+<ion-content padding>
+    <form [formGroup]="authForm" (ngSubmit)="onSubmit(authForm.value)">
+        <ion-item [ngClass]="{'error-border':!authForm.controls.username.valid && authForm.controls.username.touched}">
+            <ion-label floating>Username</ion-label>
+            <ion-input formControlName="username" type="text"></ion-input>
+        </ion-item>
+
+        <ion-item *ngIf="authForm.controls.username.hasError('required') && authForm.controls.username.touched">
+            <p>Sorry, field username is required!</p>
+        </ion-item>
+        <ion-item *ngIf="authForm.controls.username.hasError('pattern') && authForm.controls.username.touched">
+            <p>Sorry, only small and capital letters are allowed!</p>
+        </ion-item>
+        <ion-item *ngIf="authForm.controls.username.hasError('minlength') && authForm.controls.username.touched">
+            <p>Sorry, minimum username length is 8!</p>
+        </ion-item>
+        <ion-item *ngIf="authForm.controls.username.hasError('maxlength') && authForm.controls.username.touched">
+            <p>Sorry, maximum username length is 30!</p>
+        </ion-item>
+
+        <ion-item [ngClass]="{'error-border':!authForm.controls.fullname.valid && authForm.controls.fullname.touched}">
+            <ion-label floating>Fullname</ion-label>
+            <ion-input formControlName="fullname" type="text"></ion-input>
+        </ion-item>
+
+        <ion-item *ngIf="authForm.controls.fullname.hasError('required') && authForm.controls.fullname.touched">
+            <p>Sorry, field fullname is required!</p>
+        </ion-item>
+        <ion-item *ngIf="authForm.controls.fullname.hasError('pattern') && authForm.controls.fullname.touched">
+            <p>Sorry, only small and capital letters are allowed!</p>
+        </ion-item>
+
+        <ion-item [ngClass]="{'error-border':!authForm.controls.email.valid && authForm.controls.email.touched}">
+            <ion-label floating>E-mail</ion-label>
+            <ion-input formControlName="email" type="text"></ion-input>
+        </ion-item>
+
+        <ion-item *ngIf="authForm.controls.email.hasError('required') && authForm.controls.email.touched">
+            <p>Sorry, field email is required!</p>
+        </ion-item>
+        <ion-item *ngIf="authForm.controls.email.hasError('pattern') && authForm.controls.email.touched">
+            <p>Sorry, @mail.com cannot found!</p>
+        </ion-item>
+
+        <ion-item [class.invalid]="!authForm.controls.user.valid && (authForm.controls.user.dirty|| submitAttempt)">
+          <ion-label>User</ion-label>
+          <ion-select multiple="true" formControlName="user">
+            <ion-option value="driver">Driver</ion-option>
+            <ion-option value="Owner">Owner</ion-option>
+          </ion-select>
+        </ion-item>
+
+        <ion-item [ngClass]="{'error-border':!authForm.controls.password.valid && authForm.controls.password.touched}">
+            <ion-label floating>Password</ion-label>
+            <ion-input formControlName="password" type="password"></ion-input>
+        </ion-item>
+        <ion-item *ngIf="authForm.controls.password.hasError('required') && authForm.controls.password.touched">
+            <p>Sorry, field password is required!</p>
+        </ion-item>
+        <ion-item *ngIf="authForm.controls.password.hasError('minlength') && authForm.controls.password.touched">
+            <p>Sorry, minimum password length is 8!</p>
+        </ion-item>
+
+        <button ion-button full color="primary" [disabled]="!authForm.valid" style="margin-top: 20px;" type="submit">SIGN UP</button>
+    </form>
+</ion-content>
