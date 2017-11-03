@@ -1,3 +1,4 @@
+import { NgModule } from '@angular/core';
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams, ToastController } from "ionic-angular";
 import { AngularFireAuth } from 'angularfire2/auth';
