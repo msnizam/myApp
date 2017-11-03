@@ -1,26 +1,24 @@
 import { Component } from '@angular/core';
-import { NavController } from 'ionic-angular';
-
-import { SignUpPage } from '../sign-up/sign-up';
-
+import { IonicPage, NavController, NavParams, ToastController } from "ionic-angular";
+import { AngularFireAuth } from 'angularfire2/auth';
+@IonicPage()
 @Component({
   selector: 'page-home',
   templateUrl: 'home.html'
 })
 export class HomePage {
 
-    username: string;
+  constructor(private afAuth: AngularFireAuth, private toast: ToastController,
+    public navCtrl: NavController, public navParams: NavParams) {
+  }
 
-    constructor(public nav: NavController) {
-        this.nav = nav;
-        this.username = window.localStorage.getItem('username');
-    }
-
-    logout() {
-        window.localStorage.removeItem('username');
-        window.localStorage.removeItem('password');
-
-        this.nav.setRoot(SignUpPage);
-        this.nav.popToRoot();
-    }
+  ionViewWillLoad(){
+    this.afAuth.authState.subscribe(data => {
+      if(data.email){
+      this.toast.create({
+        message: 'Welcome, ${data.email}',
+        duration: 3000
+      }).present();
+  }
+})}
 }
