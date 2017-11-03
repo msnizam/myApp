@@ -1,3 +1,4 @@
+import { NgModule } from '@angular/core';
 import { Component } from '@angular/core';
 import { NgModule } from '@angular/core';
 import { IonicPage, NavController, NavParams, ToastController } from "ionic-angular";
